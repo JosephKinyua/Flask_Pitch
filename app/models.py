@@ -9,4 +9,4 @@ class User(db.Model):
     profile_pic = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
     comments = db.relationship('Comment', backref='users', lazy= 'dynamic')
-    date_join = db.Column(db.DateTime, default = datetime.utcnow())
+   
