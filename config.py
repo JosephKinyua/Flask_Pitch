@@ -9,7 +9,8 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     UPLOADED_PHOTOS_DEST = 'app/static/photo
 
-
+class ProdConfig(Config):
+    pass
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://pitches:joseph@localhost/Pitches_test'
