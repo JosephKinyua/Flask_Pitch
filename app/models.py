@@ -1,4 +1,6 @@
 from . import db
+
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 class User(db.Model):
     __tablename__ = 'users'
@@ -7,6 +9,8 @@ class User(db.Model):
     email = db.Column(db.String(255))
     profile_pic = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
+    comments = db.relationship('Comment', backref='users', lazy= 'dynamic')
+    date_join = db.Column(db.DateTime, default = datetime.utcnow())
 
     @property
     def password(self):
@@ -23,3 +27,22 @@ class User(db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
+class Pitch(db.Model):
+    __tablename__ = 'pitch'
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    content = db.Column(db.String())
+    category = db.Column(db.String())
+    posted = db.Column(db.DateTime, default=datetime.utcnow())
+    likes = db.relationship('Likes', backref = 'pitch', lazy = 'dynamic')
+    dislikes = db.relationship('Dislikes', backref = 'pitch', lazy = 'dynamic')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    comments = db.relationship('Comment', backref='pitch', lazy='dynamic')
+
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_pitch_category(cls, group):
+        return cls.query.filter_by(category=group).all()
