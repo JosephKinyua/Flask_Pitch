@@ -62,3 +62,35 @@ class Comment(db.Model):
   @classmethod
   def get_specific_comment(cls, id):
     return cls.query.filter_by(pitch_id = id).all()
+    
+
+class Likes(db.Model):
+  __tablename__ = 'likes'
+
+  id = db.Column(db.Integer,primary_key=True)
+  likes = db.Column(db.Integer,default=1)
+  pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+  user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+
+  def save_likes(self):
+      db.session.add(self)
+      db.session.commit()
+
+  @classmethod
+  def add_likes(cls,id):
+      likes_pitch = cls(user = current_user, pitch_id=id)
+      likes_pitch.save_likes()
+
+  
+  @classmethod
+  def get_likes(cls,id):
+      likes = cls.query.filter_by(pitch_id=id).all()
+      return likes
+
+  @classmethod
+  def get_all_likes(cls):
+      likes = cls.query.order_by('id').all()
+      return likes
+
+  def __repr__(self):
+      return f'{self.user_id}:{self.pitch_id}'
