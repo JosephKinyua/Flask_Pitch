@@ -62,7 +62,7 @@ class Comment(db.Model):
   @classmethod
   def get_specific_comment(cls, id):
     return cls.query.filter_by(pitch_id = id).all()
-    
+
 
 class Likes(db.Model):
   __tablename__ = 'likes'
@@ -91,6 +91,38 @@ class Likes(db.Model):
   def get_all_likes(cls):
       likes = cls.query.order_by('id').all()
       return likes
+
+  def __repr__(self):
+      return f'{self.user_id}:{self.pitch_id}'
+      
+
+class Dislikes(db.Model):
+  __tablename__ = 'dislikes'
+
+  id = db.Column(db.Integer,primary_key=True)
+  dislikes = db.Column(db.Integer,default=1)
+  pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+  user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+
+  def save_dislikes(self):
+      db.session.add(self)
+      db.session.commit()
+
+  @classmethod
+  def add_dislikes(cls,id):
+      dislikes_pitch = cls(user = current_user, pitch_id=id)
+      dislikes_pitch.save_dislikes()
+
+  
+  @classmethod
+  def get_dislikes(cls,id):
+      dislikes = cls.query.filter_by(pitch_id=id).all()
+      return dislikes
+
+  @classmethod
+  def get_all_dislikes(cls):
+      dislikes = cls.query.order_by('id').all()
+      return dislikes
 
   def __repr__(self):
       return f'{self.user_id}:{self.pitch_id}'
