@@ -46,3 +46,19 @@ class Pitch(db.Model):
     @classmethod
     def get_pitch_category(cls, group):
         return cls.query.filter_by(category=group).all()
+
+class Comment(db.Model):
+  __tablename__ = 'comments'
+
+  id = db.Column(db.Integer, primary_key = True)
+  comment = db.Column(db.String(2000))
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+
+  def save_comment(self):
+    db.session.add(self)
+    db.session.commit()
+  
+  @classmethod
+  def get_specific_comment(cls, id):
+    return cls.query.filter_by(pitch_id = id).all()
