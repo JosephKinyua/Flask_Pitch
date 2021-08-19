@@ -1,0 +1,28 @@
+{% extends 'base.html'%} {% import "bootstrap/wtf.html" as wtf %} {% block content %}
+<h3 class="text-center">New Pitch</h3>
+<div class="container d-flex justify-content-center align-items-center">
+
+    <div class="loginForm ">
+        <p>You Got <span class="text-danger">60 seconds</span> to Make it or Be Broken </p>
+        <p>Time: <span id='countdown'>60</span></p>
+        {{ wtf.quick_form(pitchform) }}
+    </div>
+</div>
+
+<script>
+    let startmin = 60;
+
+    const countdownEl = document.getElementById('countdown')
+
+    timerid = setInterval(function() {
+        if (startmin != 0) {
+            countdownEl.innerHTML = `${startmin}`;
+            startmin--;
+        } else {
+            clearInterval(timerid)
+            document.getElementById('submit').click();
+        }
+    }, 1000);
+</script>
+
+{% endblock %}
