@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% import 'macros.html' as macro %} {% block content%}
+
+<h1 class="text-center">One Minute Pitches</h1>
+<div id="inspire">
+    <h3 class="text-center"> Inspirations </h3>
+    {{ macro.displayPitches(inspire) }}
+</div>
+
+<div id="pickup">
+    <h3 class="text-center"> PickUp lines</h3>
+    {{ macro.displayPitches(pickup) }}
+</div>
+
+<div id="slogan">
+    <h3 class="text-center"> Product Slogans</h3>
+    {{ macro.displayPitches(slogan) }}
+</div>
+
+{% endblock %}
