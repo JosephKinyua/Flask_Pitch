@@ -10,13 +10,13 @@
         <div class="text">
             <p>{{ nopit.content }}</p>
         </div>
-        <div class='d-md-flex justify-content-between mt-1'>
+        <div class="d-md-flex justify-content-between mt-1">
 
             <a href="{{url_for('main.likes',pitch_id = nopit.id)}}" class="btn btn-primary btn-sm"><i></i>Likes <span>{{nopit.likes.count()}}</span></a>
             <a href="{{url_for('main.dislikes',pitch_id = nopit.id)}}" class="btn btn-danger btn-sm"></i>Dislikes <span>{{nopit.dislikes.count()}}</span></a>
 
             <span>Category: {{nopit.category}}</span>
-            <a href="{{ url_for('main.comment', id= nopit.id) }}"><button class="btn btn-btn-primary">Comment</button></a>
+            <a href="{{ url_for('main.comment', id= nopit.id) }}"><button class="btn btn-primary">Comment</button></a>
         </div>
     </div>
     {% endfor %}

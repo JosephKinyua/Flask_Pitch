@@ -1,8 +1,12 @@
 .loginForm {
     width: 450px;
     margin-top: 30px;
-    background-color: rgb(226, 196, 22, 0.5);
+    background-color: rgba(245, 222, 18, 0.5);
     padding: 20px;
     border-radius: 5px;
     font-size: 17px;
+}
+
+.pitch {
+    border: 2px solid black;
 }
