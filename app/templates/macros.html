@@ -16,7 +16,7 @@
             <a href="{{url_for('main.dislikes',pitch_id = nopit.id)}}" class="btn btn-danger btn-sm"></i>Dislikes <span>{{nopit.dislikes.count()}}</span></a>
 
             <span>Category: {{nopit.category}}</span>
-            <a href="{{ url_for('main.comment', id= nopit.id) }}"><button class="btn btn-md">Comment</button></a>
+            <a href="{{ url_for('main.comment', id= nopit.id) }}"><button class="btn btn-btn-primary">Comment</button></a>
         </div>
     </div>
     {% endfor %}
