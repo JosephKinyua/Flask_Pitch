@@ -1,0 +1,23 @@
+ {% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content%}
+
+<p class="text-center">Comment <span>{{ pitch.title }}</span></p>
+<div class="container d-flex justify-content-center align-items-center">
+
+    <div class="commentForm">
+        <div class="content">
+            {{ pitch.content }}
+        </div>
+        {{ wtf.quick_form(comment) }}
+    </div>
+</div>
+<div class="row">
+    {% if pitchcomment %} {% for justone in pitchcomment%}
+    <div class="pitch col-md-3">
+        <p>{{ justone.comment }}</p>
+        <p>Comment By <span class="text-success">{{ justone.users.username|capitalize }}</span></p>
+    </div>
+    {% endfor %} {% else %}
+    <p>No comments Yet</p>
+    {% endif %}
+</div>
+{% endblock %}
