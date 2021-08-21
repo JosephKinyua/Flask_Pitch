@@ -1,9 +1,10 @@
 {% extends 'base.html' %} {% import 'macros.html' as macro %} {% block content%}
 <div class="container bg-info">
     <h1 class="text-center bg-info p-4">Pitches</h1>
-    <div id="inspire">
+    <div class="inspire">
         <h3 class="text-center"> Inspirations </h3>
-        {{ macro.displayPitches(inspire) }}
+        <div class="container bg-success"> {{ macro.displayPitches(inspire) }} </div>
+
     </div>
 
     <div id="pickup">
